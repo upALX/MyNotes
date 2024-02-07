@@ -17,12 +17,12 @@ It is a web app that take notes by text and audio.
 ![REACT](https://img.shields.io/badge/-React-05122A?style=flat&logo=react)&nbsp;
 ![SQLite](https://img.shields.io/badge/-SQLite-05122A?style=flat&logo=sqlite)&nbsp;
 ![Vite](https://img.shields.io/badge/-Vite-05122A?style=flat&logo=vite)&nbsp;
+![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-05122A?style=flat&logo=tailwindcss)&nbsp;
 
 ## How to use 🫁
 
 **requirements:**
   - Node >= 20 ``sudo apt install nodejs npm``
-  - Typescript ``npm install typescript @node/types -D``
 
 **1 - Clone this repo:**
 ```
