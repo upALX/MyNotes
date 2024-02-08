@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import {X} from 'lucide-react'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 
 export function NewCardNote(){
@@ -8,6 +8,12 @@ export function NewCardNote(){
 
     function handleStartNote(){
         setShouldShowTextMessage(false)
+    }
+
+    function handleContentChange(event: ChangeEvent<HTMLTextAreaElement>){
+        if(event.target.value === ''){
+            setShouldShowTextMessage(true)
+        }
     }
 
     return (
@@ -34,7 +40,7 @@ export function NewCardNote(){
                     Start a button note with <button  onClick={handleStartNote} className="text-lime-300 ">text</button> or  <button onClick={handleStartNote} className="text-lime-300 ">audio</button>...
                     </p>
                 ) : (
-                    <textarea name="" id="" autoFocus className='text-sm leading-6 text-slate-400 bg-transparent rezise-none flex-1 outline-none' >
+                    <textarea name="" id="" autoFocus className='text-sm leading-6 text-slate-400 bg-transparent rezise-none flex-1 outline-none' onChange={handleContentChange}>
                     </textarea>
                 )}
               </div>
