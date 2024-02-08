@@ -1,6 +1,10 @@
 import logo from "./assets/react.svg";
 import { CardNote } from "./components/card-note";
 
+const note_information = {
+  date: new Date(),
+  content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis dolor deleniti dolorem ratione vitae, nostrum sequi molestias soluta totam, excepturi asperiores placeat est porro. Provident alias nobis quo animi nam!'
+}
 
 export function App() {
 
@@ -17,9 +21,9 @@ export function App() {
           <span className="text-sm font-medium text-slate-300">Add note...</span>
           <p className="text-sm leading-6 text-slate-400 ">Tap to record audio note 🤓</p>
         </div>
-        <CardNote/>
-        <CardNote/>
-        <CardNote/>
+        <CardNote new_note_information={note_information}/>
+        <CardNote new_note_information={note_information}/>
+        <CardNote new_note_information={note_information}/>
       </div>
     </div>
     </>
