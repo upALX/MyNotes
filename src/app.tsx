@@ -1,5 +1,6 @@
 import logo from "./assets/react.svg";
 import { CardNote } from "./components/card-note";
+import { NewCardNote } from "./components/new-note"; 
 
 const note_information = {
   date: new Date(),
@@ -17,12 +18,7 @@ export function App() {
       </form>
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
-        <div className="rounded-md bg-slate-600  p-5 space-y-6 overflow-hidden relative ">
-          <span className="text-sm font-medium text-slate-300">Add note...</span>
-          <p className="text-sm leading-6 text-slate-400 ">Tap to record audio note 🤓</p>
-        </div>
-        <CardNote new_note_information={note_information}/>
-        <CardNote new_note_information={note_information}/>
+        <NewCardNote/>
         <CardNote new_note_information={note_information}/>
       </div>
     </div>
