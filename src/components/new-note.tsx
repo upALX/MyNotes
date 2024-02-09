@@ -7,6 +7,7 @@ interface NewNoteCard {
     whenNoteCreated: (contentNote: string) => void
 }
 
+let speechRecognition: SpeechRecognition | null = null
 
 export function NewCardNote({whenNoteCreated}: NewNoteCard){
     const [shouldShowTextMessage, setShouldShowTextMessage] = useState(true)    
@@ -42,11 +43,50 @@ export function NewCardNote({whenNoteCreated}: NewNoteCard){
     }
 
     function handleStartRecord(){
+
+        const isSpeechRecognitionAPIAvailable = 'SpeechRecognition' in window
+        || 'webkitSpeechRecognition' in window
+
+        if (!isSpeechRecognitionAPIAvailable){
+            alert('Your browser has no support to record API :(') // put a toast here with alert
+            return
+        }
+
         setIsRecording(true)
+
+        setShouldShowTextMessage(false)
+
+        const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
+
+        speechRecognition = new SpeechRecognitionAPI
+
+        speechRecognition.lang = 'pt-BR';
+        speechRecognition.continuous = true; // dont exit the recording if has silance, only when 
+        speechRecognition.maxAlternatives = 1; // return 
+        speechRecognition.interimResults = true;  // return all result of text when i talk 
+
+        speechRecognition.onresult = (event) =>{
+            // console.log(event.results)
+            const transcription = Array.from(event.results).reduce( (transcriptionInRealTime, transcriptionWordsMaked) => {
+                return transcriptionInRealTime.concat(transcriptionWordsMaked[0].transcript)
+            }, '')
+
+            setContent(transcription)
+        }
+
+        speechRecognition.onerror = (event) => {
+            console.error(event)
+        }
+
+        speechRecognition.start()
     }
 
     function handleStopRecord(){
         setIsRecording(false)
+
+        if (speechRecognition != null){
+            speechRecognition.stop()
+        }
     }
 
     return (
