@@ -1,13 +1,27 @@
+import { useState } from "react";
 import logo from "./assets/react.svg";
 import { CardNote } from "./components/card-note";
 import { NewCardNote } from "./components/new-note"; 
 
-const note_information = {
-  date: new Date(),
-  content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis dolor deleniti dolorem ratione vitae, nostrum sequi molestias soluta totam, excepturi asperiores placeat est porro. Provident alias nobis quo animi nam!'
+interface Note{
+  id: string,
+  date: Date,
+  content: string
 }
 
 export function App() {
+
+  const [notes, setNotes] = useState<Note[]>([])
+
+  function whenNoteCreated(content: string){
+    const newNote = {
+      id: crypto.randomUUID(),
+      date: new Date(),
+      content,
+    }
+
+    setNotes([newNote, ...notes]) // copy all notes that i have, and add a new note
+  }
 
   return (
     <>
@@ -18,8 +32,13 @@ export function App() {
       </form>
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
-        <NewCardNote/>
-        <CardNote new_note_information={note_information}/>
+        <NewCardNote whenNoteCreated={whenNoteCreated}/>
+        {/* <CardNote new_note_information={note_information}/> */}
+
+        {notes.map(note => {
+          return <CardNote key={note.id} new_note_information={note}/>
+        })}
+
       </div>
     </div>
     </>

@@ -1,11 +1,15 @@
 import * as Dialog from '@radix-ui/react-dialog'
+import { validateHeaderValue } from 'http'
 import {X} from 'lucide-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import {toast} from 'sonner'
 
+interface NewNoteCard {
+    whenNoteCreated: (contentNote: string) => void
+}
 
 
-export function NewCardNote(){
+export function NewCardNote({whenNoteCreated}: NewNoteCard){
     const [shouldShowTextMessage, setShouldShowTextMessage] = useState(true)    
     const [contentNote, setContent] = useState('')
 
@@ -23,6 +27,12 @@ export function NewCardNote(){
 
     function handleSaveNote(event: FormEvent){
         event.preventDefault()
+
+        whenNoteCreated(contentNote)
+
+        setContent('')
+
+        setShouldShowTextMessage(true)
 
         toast.success('Your note was created with success 🚀')
     }
@@ -54,8 +64,7 @@ export function NewCardNote(){
                     Start a button note with <button  onClick={handleStartNote} className="text-lime-300 ">text</button> or  <button onClick={handleStartNote} className="text-lime-300 ">audio</button>...
                     </p>
                 ) : (
-                    <textarea name="" id="" autoFocus className='text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none' onChange={handleContentChange}>
-                    </textarea>
+                    <textarea name="" id="" autoFocus className='text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none' onChange={handleContentChange} value={contentNote}/>
                 )}
               </div>
 
