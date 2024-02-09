@@ -29,8 +29,15 @@ It is a web app that take notes by text and audio.
 git clone git@github.com:upALX/MyNotes.git
 ```
 
-** ** 
+**2 - Install all dependencies of app:**
+`` 
+npm i
+`` 
 
+**Run the app:**
+``
+npm run dev
+``
 
 ## Make your mark :triangular_flag_on_post:   
 
