@@ -30,14 +30,14 @@ git clone git@github.com:upALX/MyNotes.git
 ```
 
 **2 - Install all dependencies of app:**
-`` 
+```
 npm i
-`` 
+```
 
-**Run the app:**
-``
+**3 - Run the app:**
+```
 npm run dev
-``
+```
 
 ## Make your mark :triangular_flag_on_post:   
 
